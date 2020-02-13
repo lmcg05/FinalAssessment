@@ -23,7 +23,7 @@ public class Items {
 //		this.email=email;
 //		this.mobile=mobile;
 //		
-	
+
 	}
 	public Items( String items_name, Double price_per_items) {
 		//		*/ String email, Long mobile*/
@@ -78,7 +78,9 @@ public class Items {
 		// TODO Auto-generated method stub
 		
 	}
-
+	public String toString() {
+		return "id:" + id + " items_name:"+ items_name + " price_per_items:" + price_per_items;
+	}
 	
 }
 

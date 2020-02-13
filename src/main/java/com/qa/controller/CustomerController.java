@@ -26,6 +26,7 @@ public class CustomerController implements CrudController<Customer> {
 	String getInput() {
 		return Utils.getInput();
 	}
+	
 
 	public List<Customer> readAll() {
 		// TODO Auto-generated method stub

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ItemsController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.controller</a> &gt; <span class="el_source">ItemsController.java</span></div><h1>ItemsController.java</h1><pre class="source lang-java linenums">package com.qa.controller;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import com.qa.services.CrudServices;
+import com.qa.services.GetItemId;
+
+import Utils.Utils;
+import domain.Customer;
+import domain.Items;
+
+public class ItemsController implements CrudController&lt;Items&gt; {
+<span class="nc" id="L15">	public static final Logger LOGGER = Logger.getLogger(ItemsController.class);</span>
+
+	private CrudServices&lt;Items&gt; ItemsService;
+<span class="nc" id="L18">	public ItemsController(CrudServices&lt;Items&gt; itemsService) {</span>
+<span class="nc" id="L19">		this.ItemsService = itemsService;</span>
+		
+<span class="nc" id="L21">	}</span>
+	String getInput() {
+<span class="nc" id="L23">		return Utils.getInput();</span>
+		
+	}
+		// TODO Auto-generated constructor stub
+	
+	//	private GetItemId&lt;Items&gt; getItemId;
+//
+//	private Object itemName;
+//
+//	public ItemsController(CrudServices&lt;Items&gt; ItemsService, GetItemId&lt;Items&gt; getItemId ) {
+//		this.ItemsService = ItemsService;
+//		this.getItemId=getItemId;
+//	}
+//
+//	String getInput() {
+//		return Utils.getInput();
+//	}
+//	public List&lt;Items&gt; readAll() {
+//		for(Items item: ItemsService.readAll()) {
+//			LOGGER.info(item.toString());
+//		}
+	public List&lt;Items&gt; readAll() {
+		// TODO Auto-generated method stub
+<span class="nc" id="L46">		List&lt;Items&gt; items = ItemsService.readAll();</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">		for (Items item : items) {</span>
+<span class="nc" id="L48">			LOGGER.info(item.toString());</span>
+<span class="nc" id="L49">		}</span>
+<span class="nc" id="L50">		return items;</span>
+		//return null;
+
+	}
+//	public Items create() {
+//		LOGGER.info(&quot;Please enter item name&quot;);
+//		String itemName = Utils.getInput(); 
+//		while(itemName.matches(&quot;.*\\d.*&quot;)) {
+//			LOGGER.info(&quot;Please enter item name&quot;);
+//			itemName = Utils.getInput();
+//		}
+//		LOGGER.info(&quot;Please enter the item price&quot;);
+//		String price= Utils.getInput(); 
+//		while(price.matches(&quot;.*[A-Z a-z].*&quot;)) {
+//			LOGGER.info(&quot;Please enter the item price&quot;);
+//			price = Utils.getInput();
+//		}
+//		Double itemPrice = Double.parseDouble(price);
+//		LOGGER.info(&quot;Please enter the item quantity&quot;);
+//		String quantity = Utils.getInput();  ;
+//		while(quantity.matches(&quot;.*[A-Z a-z].*&quot;)) {
+//			LOGGER.info(&quot;Please enter the item quantity&quot;);
+//			quantity = Utils.getInput();
+//		}
+//		Long itemQuantity = Long.parseLong(quantity);
+//		
+//		return ItemsService.create(new Items(itemName,itemPrice,itemQuantity));
+//		
+	public Items create() {
+		// TODO Auto-generated method stub
+<span class="nc" id="L80">		LOGGER.info(&quot;Please enter a items_name&quot;);</span>
+<span class="nc" id="L81">		String items_name = getInput();</span>
+<span class="nc" id="L82">		LOGGER.info(&quot;Please enter a price_per_items&quot;);</span>
+<span class="nc" id="L83">		Double price_per_items = Double.valueOf(getInput());</span>
+<span class="nc" id="L84">		Items items = ItemsService.create(new Items(items_name, price_per_items));</span>
+<span class="nc" id="L85">		LOGGER.info(&quot;Customer created&quot;);</span>
+<span class="nc" id="L86">		return items;</span>
+	}
+
+	public Items update() {
+		// TODO Auto-generated method stub
+<span class="nc" id="L91">		LOGGER.info(&quot;Please enter the ID of the item you would like to update&quot;);</span>
+<span class="nc" id="L92">		Long id = Long.valueOf(getInput());</span>
+<span class="nc" id="L93">		LOGGER.info(&quot;Please enter a Items_name&quot;);</span>
+<span class="nc" id="L94">		String Items_name = getInput();</span>
+<span class="nc" id="L95">		LOGGER.info(&quot;Please enter a price_per_items&quot;);</span>
+<span class="nc" id="L96">		Double price_per_items = Double.valueOf(getInput());</span>
+<span class="nc" id="L97">		Items items = ItemsService.update( new Items(id, Items_name, price_per_items));</span>
+<span class="nc" id="L98">		LOGGER.info(&quot;Item List Updated&quot;);</span>
+<span class="nc" id="L99">		return items;</span>
+	}
+//	public Items update() {
+//		LOGGER.info(&quot;Hi, it seems you want to change some details, please follow the steps below&quot;);
+//		Long itemid= getItem_ID();
+//		if(itemid!=0) {
+//		LOGGER.info(&quot;Please enter new or current item name&quot;);
+//		String itemName = Utils.getInput(); 
+//		while(itemName.matches(&quot;.*\\d.*&quot;)) {
+//			LOGGER.info(&quot;Please enter new or current item name&quot;);
+//			itemName = Utils.getInput();
+//		}
+//		LOGGER.info(&quot;Please enter the new or current item price&quot;);
+//		String price= Utils.getInput(); 
+//		while(price.matches(&quot;.*[A-Z a-z].*&quot;)) {
+//			LOGGER.info(&quot;Please enter the new or current item price&quot;);
+//			price = Utils.getInput();
+//		}
+//		Double itemPrice = Double.parseDouble(price);
+//		LOGGER.info(&quot;Please enter the new or current item quantity&quot;);
+//		String quantity = Utils.getInput();  ;
+//		while(quantity.matches(&quot;.*[A-Z a-z].*&quot;)) {
+//			LOGGER.info(&quot;Please enter the new or current item quantity&quot;);
+//			quantity = Utils.getInput();
+//		}
+//		Long itemQuantity = Long.parseLong(quantity);
+//		
+//		
+//		ItemsService.update(itemid, new Items(itemName,itemPrice,itemQuantity));
+//		}
+//		return null;
+//	}
+
+	public void delete() {
+		// TODO Auto-generated method stub
+<span class="nc" id="L134">		LOGGER.info(&quot;Please enter the id of the customer you would like to delete&quot;);</span>
+<span class="nc" id="L135">		Long id = Long.valueOf(getInput());</span>
+<span class="nc" id="L136">		ItemsService.delete(id);</span>
+	
+<span class="nc" id="L138">	}</span>
+}
+//
+//
+//	public Long getItemId() {
+//		LOGGER.info(&quot;Please enter the name&quot;);
+//		String itemName = Utils.getInput();
+//		while(itemName.matches(&quot;.*\\d.*&quot;)) {
+//			LOGGER.info(&quot;Please enter item name&quot;);
+//			itemName = Utils.getInput();
+//			
+//	Long itemId = getItemId.getItem_ID(new Items(itemName));
+//	  return itemId;
+//	}
+//		return null;
+//
+//}
+//
+//	@Override
+//	public Long getItem_ID() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
