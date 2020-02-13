@@ -2,6 +2,8 @@ package com.qa.persistence;
 
 import org.apache.log4j.Logger;
 
+
+
 import Utils.Utils;
 
 public enum Domain {
@@ -18,13 +20,13 @@ public enum Domain {
 		this.description = description;
 	}
 	
-	public String description() {
+	public String getDescription() {
 		return this.name() + ": " +this.description;
 	}
 	
 	public static void printDomains() {
 		for (Domain domain : Domain.values()) {
-			LOGGER.info(domain.description());
+			LOGGER.info(domain.getDescription());
 		}
 	}
 	
@@ -42,4 +44,7 @@ public enum Domain {
 	}
 	
 }
+
+	
+
 
