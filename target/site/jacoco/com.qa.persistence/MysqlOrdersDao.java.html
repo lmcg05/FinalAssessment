@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MysqlOrdersDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.persistence</a> &gt; <span class="el_source">MysqlOrdersDao.java</span></div><h1>MysqlOrdersDao.java</h1><pre class="source lang-java linenums">package com.qa.persistence;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import domain.Items;
+import domain.Order;
+import domain.Customer;
+
+public class MysqlOrdersDao implements Dao&lt;Order&gt; {
+<span class="nc" id="L19">	public static final Logger LOGGER = Logger.getLogger(MysqlOrdersDao.class);</span>
+	private Connection connection;
+
+<span class="nc" id="L22">	public MysqlOrdersDao(String username, String password) {</span>
+		try {
+<span class="nc" id="L24">		this.connection = DriverManager.getConnection(&quot;jdbc:mysql://35.225.56.59:3306/customerdomain&quot;, &quot;root&quot;, &quot;QA4312814&quot;);</span>
+<span class="nc" id="L25">	} catch (SQLException e) {</span>
+		// TODO Auto-generated catch block
+<span class="nc" id="L27">		LOGGER.error(e.getStackTrace());</span>
+<span class="nc" id="L28">	}</span>
+	
+		
+<span class="nc" id="L31">	}</span>
+
+	public Order create(Order t) {
+			try {
+<span class="nc" id="L35">	            Statement statement = connection.createStatement();</span>
+<span class="nc" id="L36">	            statement.executeUpdate(&quot;insert into orders(price, customer_ID) values(&quot; + t.getPrice()+ &quot;,&quot;  + t.getCustomer_ID() + &quot;)&quot; );</span>
+	            
+<span class="nc" id="L38">	            System.out.println(&quot;Orders added complete&quot;);</span>
+<span class="nc" id="L39">	            LOGGER.info(&quot;Order created&quot;);</span>
+<span class="nc" id="L40">	            connection.close();</span>
+<span class="nc" id="L41">				} catch (Exception e) {</span>
+<span class="nc" id="L42">					LOGGER.debug(e.getStackTrace());</span>
+<span class="nc" id="L43">					LOGGER.error(e.getMessage());</span>
+<span class="nc" id="L44">				}</span>
+	            //logger.error(&quot;error inserting the customer details&quot;);
+//	        }
+<span class="nc" id="L47">			return null;</span>
+	    }
+		// TODO Auto-generated method stub
+
+	
+	
+	public ArrayList&lt;Order&gt; readAll() {
+<span class="nc" id="L54">		ArrayList&lt;Order&gt; orders = new ArrayList&lt;Order&gt;();</span>
+		try {
+			
+<span class="nc" id="L57">			Statement statement = connection.createStatement();</span>
+<span class="nc" id="L58">			ResultSet resultSet = statement.executeQuery(&quot;select * from orders&quot;);</span>
+			
+<span class="nc bnc" id="L60" title="All 2 branches missed.">			while (resultSet.next()) {</span>
+				
+<span class="nc" id="L62">				int id = resultSet.getInt(&quot;orders_ID&quot;);</span>
+<span class="nc" id="L63">				Long customer_ID = (long) resultSet.getInt(&quot;customer_ID&quot;);// ensure that this matches the MySQL table name</span>
+<span class="nc" id="L64">				Double price = resultSet.getDouble(&quot;price&quot;);</span>
+				
+				
+				
+<span class="nc" id="L68">				orders.add(new Order(id, price, customer_ID));</span>
+						///* email, mobile*/;
+				
+<span class="nc" id="L71">			}</span>
+<span class="nc" id="L72">		} catch (Exception e) {</span>
+<span class="nc" id="L73">			LOGGER.error(&quot;error displaying the list of orders&quot;);</span>
+<span class="nc" id="L74">		}</span>
+<span class="nc" id="L75">		return orders;</span>
+	}
+       
+	public Order update(Order t) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L80">		String sql = &quot;UPDATE orders customer_ID = ?, set price = ? where orders_ID = ?&quot;;;</span>
+		try {
+<span class="nc" id="L82">			PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L83">			stmt.setLong(1, t.getCustomer_ID());</span>
+<span class="nc" id="L84">			stmt.setDouble(2, t.getPrice()); // the numbers corresponds to the sql statements &quot;?&quot;</span>
+<span class="nc" id="L85">			stmt.setLong(3, t.getId());</span>
+<span class="nc" id="L86">			stmt.execute();</span>
+<span class="nc" id="L87">			LOGGER.info(&quot;Order created&quot;);</span>
+<span class="nc" id="L88">		} catch (Exception e) {</span>
+<span class="nc" id="L89">			LOGGER.error(&quot;error inserting the order details&quot;);</span>
+			
+<span class="nc" id="L91">		}</span>
+<span class="nc" id="L92">		return null;</span>
+	}
+	
+
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L98">		String sql = &quot;DELETE FROM orders WHERE orders_ID = ?&quot;;</span>
+		try {
+<span class="nc" id="L100">			PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L101">			stmt.setLong(1, id);</span>
+<span class="nc" id="L102">			stmt.execute();</span>
+<span class="nc" id="L103">			System.out.println(&quot;Delete complete &quot;);</span>
+<span class="nc" id="L104">			connection.close();</span>
+<span class="nc" id="L105">		} catch (Exception e) {</span>
+<span class="nc" id="L106">			LOGGER.error(&quot;Delete failed&quot;);</span>
+<span class="nc" id="L107">		}</span>
+		
+	
+<span class="nc" id="L110">	}</span>
+
+
+	
+	  public List&lt;Items&gt; itemsDisplay () {
+<span class="nc" id="L115">		  ArrayList&lt;Items&gt; items = new ArrayList&lt;Items&gt;();</span>
+<span class="nc" id="L116">			try (Connection connection = DriverManager.getConnection(&quot;jdbc:mysql://35.225.56.59:3306/customerdomain&quot;, &quot;root&quot;, &quot;QA4312814&quot;)) {</span>
+<span class="nc" id="L117">				Statement statement = connection.createStatement();</span>
+<span class="nc" id="L118">				ResultSet resultSet = statement.executeQuery(&quot;select * from Items&quot;);</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">				while (resultSet.next()) {</span>
+<span class="nc" id="L120">					Long id = (long) resultSet.getInt(&quot;id&quot;);</span>
+<span class="nc" id="L121">					String itemName = resultSet.getString(&quot;itemName&quot;);</span>
+<span class="nc" id="L122">					Double price = resultSet.getDouble(&quot;price&quot;);</span>
+<span class="nc" id="L123">					Items item = new Items(id, itemName, price);</span>
+<span class="nc" id="L124">					item.add(items);</span>
+<span class="nc" id="L125">				}</span>
+<span class="nc" id="L126">			} catch (Exception e) {</span>
+<span class="nc" id="L127">				LOGGER.error(&quot;error displaying the list of items&quot;);</span>
+<span class="nc" id="L128">			}</span>
+<span class="nc" id="L129">			return items;</span>
+		  
+	  }
+
+	  public Double itemsPrice(Items c) {
+<span class="nc" id="L134">		  String sql = &quot;SELECT price from Items where item_name =?&quot;;</span>
+<span class="nc" id="L135">		  Double price_per_items = (double)0;</span>
+		  try {
+<span class="nc" id="L137">				checkConnection();</span>
+<span class="nc" id="L138">				PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L139">				stmt.setString(1, c.getItems_name());</span>
+<span class="nc" id="L140">				ResultSet rs = stmt.executeQuery();</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">				while(rs.next()) {</span>
+					
+<span class="nc" id="L143">					 price_per_items = rs.getDouble(&quot;price_per_items&quot;);</span>
+					
+				}
+<span class="nc" id="L146">				LOGGER.info(&quot;price obtained&quot;);</span>
+<span class="nc" id="L147">				rs.close();</span>
+<span class="nc" id="L148">				connection.close();</span>
+<span class="nc" id="L149">		}catch(Exception e) {</span>
+<span class="nc" id="L150">			 LOGGER.error(&quot;price not obtained&quot;);</span>
+<span class="nc" id="L151">			 price_per_items= (double) 0;</span>
+			 
+<span class="nc" id="L153">		 }</span>
+<span class="nc" id="L154">		 return price_per_items;</span>
+	  }
+
+	private void checkConnection() {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L160">	}</span>
+
+	
+	public Long getCustomer_ID(Customer v) {
+<span class="nc" id="L164">		String sql = &quot;SELECT id from Customer WHERE firstName= ? &amp;&amp; lastName= ? &amp;&amp; email= ?&quot;;</span>
+<span class="nc" id="L165">		Long id =(long) 0;</span>
+		try {
+<span class="nc" id="L167">			checkConnection();</span>
+<span class="nc" id="L168">			PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L169">			stmt.setString(1, v.getFirstName());</span>
+<span class="nc" id="L170">			stmt.setString(2, v.getLastNAme());</span>
+<span class="nc" id="L171">			stmt.setString(3, v.getEmail());</span>
+<span class="nc" id="L172">			ResultSet rs = stmt.executeQuery();</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">			while(rs.next()) {</span>
+				
+<span class="nc" id="L175">				 id = (long) rs.getInt(&quot;customer_ID&quot;);</span>
+				
+<span class="nc bnc" id="L177" title="All 2 branches missed.">			}if(id==0) {</span>
+<span class="nc" id="L178">				LOGGER.error(&quot;This customer does not exist in the database&quot;);</span>
+			}else {
+<span class="nc" id="L180">				LOGGER.info(&quot;Customerid obtained&quot;);</span>
+			}
+<span class="nc" id="L182">			rs.close();</span>
+<span class="nc" id="L183">			connection.close();</span>
+<span class="nc" id="L184">	}catch(Exception e) {</span>
+<span class="nc" id="L185">		 LOGGER.error(&quot;Customerid not obtained&quot;);</span>
+<span class="nc" id="L186">		 id= (long) 0;</span>
+		 
+<span class="nc" id="L188">	 }</span>
+<span class="nc" id="L189">		LOGGER.info(&quot;The customerid is &quot;+id);</span>
+<span class="nc" id="L190">		return id;</span>
+	}
+
+	public Long getOrder_ID(long customer_ID, double price) {
+<span class="nc" id="L194">		String sql = &quot;SELECT id from orders WHERE customer_ID= ? &amp;&amp; price= ? &quot;;</span>
+<span class="nc" id="L195">		long id =(long) 0;</span>
+		try {
+<span class="nc" id="L197">			checkConnection();</span>
+<span class="nc" id="L198">			PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L199">			stmt.setLong(1, customer_ID);</span>
+<span class="nc" id="L200">			stmt.setDouble(2,price);</span>
+			
+<span class="nc" id="L202">			ResultSet rs = stmt.executeQuery();</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">			while(rs.next()) {</span>
+				
+<span class="nc" id="L205">				 id = (long) rs.getInt(&quot;customer_ID&quot;);</span>
+				
+			}
+<span class="nc bnc" id="L208" title="All 2 branches missed.">			if(id==0) {</span>
+<span class="nc" id="L209">				LOGGER.error(&quot;This order does not exist in the database&quot;);</span>
+			}else {
+<span class="nc" id="L211">				LOGGER.info(&quot;Orderid obtained&quot;);</span>
+			}
+<span class="nc" id="L213">			rs.close();</span>
+<span class="nc" id="L214">			connection.close();</span>
+<span class="nc" id="L215">	}catch(Exception e) {</span>
+<span class="nc" id="L216">		LOGGER.error(&quot;Orderid not obtained&quot;);</span>
+<span class="nc" id="L217">		 id= (long) 0;</span>
+		 
+<span class="nc" id="L219">	 }</span>
+<span class="nc" id="L220">		LOGGER.info(&quot;The orderid is &quot;+id);</span>
+<span class="nc" id="L221">		return id;</span>
+		
+	}
+
+	public Long getItem_Id(Items u) {
+<span class="nc" id="L226">		String sql = &quot;SELECT id from Items WHERE item_name= ?&quot;;</span>
+<span class="nc" id="L227">		Long id =(long) 0;</span>
+		try {
+<span class="nc" id="L229">			checkConnection();</span>
+<span class="nc" id="L230">			PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L231">			stmt.setString(1, u.getItems_name());</span>
+		
+<span class="nc" id="L233">			ResultSet rs = stmt.executeQuery();</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">			while(rs.next()) {</span>
+				
+<span class="nc" id="L236">				 id = (long) rs.getInt(&quot;Items_ID&quot;);</span>
+				
+			}
+<span class="nc bnc" id="L239" title="All 2 branches missed.">			if(id==0) {</span>
+<span class="nc" id="L240">				LOGGER.error(&quot;This item does not exist in the database&quot;);</span>
+			}else {
+<span class="nc" id="L242">				LOGGER.info(&quot;Itemid obtained&quot;);</span>
+			}
+<span class="nc" id="L244">			rs.close();</span>
+<span class="nc" id="L245">			connection.close();</span>
+<span class="nc" id="L246">	}catch(Exception e) {</span>
+<span class="nc" id="L247">		LOGGER.error(&quot;Itemid not obtained&quot;);</span>
+<span class="nc" id="L248">		 id= (long) 0;</span>
+		 
+<span class="nc" id="L250">	 }</span>
+<span class="nc" id="L251">		LOGGER.info(&quot;The itemid is &quot;+id);</span>
+<span class="nc" id="L252">		return id;</span>
+	}
+	
+	public List&lt;Order&gt; orderDetailsDisplay(long id) {
+<span class="nc" id="L256">		 ArrayList&lt;Order&gt; orders = new ArrayList&lt;Order&gt;();</span>
+			try {
+<span class="nc" id="L258">				checkConnection();</span>
+<span class="nc" id="L259">				String sql= &quot;select * from Orders where customer_ID =? &quot;;</span>
+<span class="nc" id="L260">				PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L261">				stmt.setLong(1, id);</span>
+<span class="nc" id="L262">				ResultSet resultSet = stmt.executeQuery();</span>
+				
+<span class="nc bnc" id="L264" title="All 2 branches missed.">				while (resultSet.next()) {</span>
+<span class="nc" id="L265">					Long idGet = (long) resultSet.getInt(&quot;order_ID&quot;);</span>
+<span class="nc" id="L266">					Long customer_ID = resultSet.getLong(&quot;customer_ID&quot;);</span>
+<span class="nc" id="L267">					Double price = resultSet.getDouble(&quot;price&quot;);</span>
+<span class="nc" id="L268">					Order order = new Order(idGet, price, customer_ID);</span>
+<span class="nc" id="L269">					orders.add(order);</span>
+<span class="nc" id="L270">				}</span>
+<span class="nc" id="L271">			} catch (Exception e) {</span>
+<span class="nc" id="L272">				LOGGER.error(&quot;error displaying the list of items&quot;);</span>
+<span class="nc" id="L273">			}</span>
+<span class="nc" id="L274">			return orders;</span>
+	}
+		
+		
+	}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Items.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">domain</a> &gt; <span class="el_source">Items.java</span></div><h1>Items.java</h1><pre class="source lang-java linenums">package domain;
+
+import java.util.ArrayList;
+
+public class Items {
+	private long id;
+//	private String firstName;
+//	private String surname;
+	private String items_name;
+	private Double price_per_items;
+//	private String email;
+//	private Long mobile;
+//	public int getSurname;
+	
+<span class="nc" id="L15">	public Items(int id, String items_name, Double price_per_items) {</span>
+	//		*/ String email, Long mobile*/
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L18">		this.id=id;</span>
+<span class="nc" id="L19">		this.items_name = items_name;</span>
+<span class="nc" id="L20">		this.price_per_items = price_per_items;</span>
+//		this.firstName=firstName;
+//		this.surname=surname;
+//		this.email=email;
+//		this.mobile=mobile;
+//		
+
+<span class="nc" id="L27">	}</span>
+<span class="nc" id="L28">	public Items( String items_name, Double price_per_items) {</span>
+		//		*/ String email, Long mobile*/
+			// TODO Auto-generated constructor stub
+<span class="nc" id="L31">			this.items_name = items_name;</span>
+<span class="nc" id="L32">			this.price_per_items = price_per_items;</span>
+			
+<span class="nc" id="L34">	}</span>
+
+	
+<span class="nc" id="L37">	public Items(Long id, String items_name, Double price_per_items) {</span>
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L39">		this.id=id;</span>
+<span class="nc" id="L40">		this.items_name = items_name;</span>
+<span class="nc" id="L41">		this.price_per_items = price_per_items;</span>
+<span class="nc" id="L42">	}</span>
+
+
+	
+<span class="nc" id="L46">	public Items(Object itemName) {</span>
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L48">	}</span>
+<span class="nc" id="L49">	public Items(String itemName, Double itemPrice, Long itemQuantity) {</span>
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L51">	}</span>
+	public long getId() {
+<span class="nc" id="L53">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L57">		this.id = id;</span>
+<span class="nc" id="L58">	}</span>
+
+	public String getItems_name() {
+<span class="nc" id="L61">		return items_name;</span>
+	}
+
+	public void setItems_name(String items_name) {
+<span class="nc" id="L65">		this.items_name = items_name;</span>
+<span class="nc" id="L66">	}</span>
+
+	public Double getPrice_per_items() {
+<span class="nc" id="L69">		return price_per_items;</span>
+	}
+
+	public void setPrice_per_items(Double price_per_items) {
+<span class="nc" id="L73">		this.price_per_items = price_per_items;</span>
+
+		
+<span class="nc" id="L76">	}</span>
+	public void add(ArrayList&lt;Items&gt; items) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L80">	}</span>
+	public String toString() {
+<span class="nc" id="L82">		return &quot;id:&quot; + id + &quot; items_name:&quot;+ items_name + &quot; price_per_items:&quot; + price_per_items;</span>
+	}
+	
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

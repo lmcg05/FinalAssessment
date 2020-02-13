@@ -1,0 +1,6 @@
+projectKey=com.qa.ims:laurence-ims
+serverUrl=http://35.189.123.196/sonarqube
+serverVersion=7.9.2.30863
+dashboardUrl=http://35.189.123.196/sonarqube/dashboard?id=com.qa.ims%3Alaurence-ims
+ceTaskId=AXA_5shX5b7qNMQhNnXl
+ceTaskUrl=http://35.189.123.196/sonarqube/api/ce/task?id=AXA_5shX5b7qNMQhNnXl

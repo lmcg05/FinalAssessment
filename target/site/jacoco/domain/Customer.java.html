@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Customer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">domain</a> &gt; <span class="el_source">Customer.java</span></div><h1>Customer.java</h1><pre class="source lang-java linenums">package domain;
+
+
+
+public class Customer {
+	private long id;
+	private String firstName;
+	private String lastNAme;
+	private String email;
+//	private String email;
+//	private Long mobile;
+//	public int getSurname;
+	
+<span class="fc" id="L14">	public Customer(String email, String firstName, String lastName) {</span>
+		//		*/ String email, Long mobile*/
+			// TODO Auto-generated constructor stub
+<span class="fc" id="L17">			this.firstName = firstName;</span>
+<span class="fc" id="L18">			this.lastNAme = lastName;</span>
+<span class="fc" id="L19">			this.email = email;</span>
+			
+<span class="fc" id="L21">	}</span>
+//			this.firstName=firstName;
+//			this.surname=surname;
+//			this.email=email;
+//			this.mobile=mobile;
+	
+<span class="nc" id="L27">	public Customer(int id, String firstName, String lastName, String email) {</span>
+	//		*/ String email, Long mobile*/
+		// TODO Auto-generated constructor stub
+<span class="nc" id="L30">		this.id=id;</span>
+<span class="nc" id="L31">		this.firstName = firstName;</span>
+<span class="nc" id="L32">		this.lastNAme = lastName;</span>
+<span class="nc" id="L33">		this.email = email;</span>
+//		this.firstName=firstName;
+//		this.surname=surname;
+//		this.email=email;
+//		this.mobile=mobile;
+//		
+<span class="nc" id="L39">	}</span>
+<span class="fc" id="L40">	public Customer(String firstName, String lastName) {</span>
+<span class="fc" id="L41">		this.firstName = firstName;</span>
+<span class="fc" id="L42">		this.lastNAme = lastName;</span>
+<span class="fc" id="L43">	}</span>
+	
+<span class="fc" id="L45">	public Customer(long id, String firstName, String lastName) {</span>
+<span class="fc" id="L46">		this.id = id;</span>
+<span class="fc" id="L47">		this.firstName = firstName;</span>
+<span class="fc" id="L48">		this.lastNAme = lastName;</span>
+<span class="fc" id="L49">	}</span>
+
+	
+		// TODO Auto-generated constructor stub
+	
+
+	public long getId() {
+<span class="nc" id="L56">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="nc" id="L60">		this.id = id;</span>
+<span class="nc" id="L61">	}</span>
+
+	public String getFirstName() {
+<span class="nc" id="L64">		return firstName;</span>
+	}
+
+	public void setFirstName(String firstName) {
+<span class="nc" id="L68">		this.firstName = firstName;</span>
+<span class="nc" id="L69">	}</span>
+
+	public String getLastNAme() {
+<span class="nc" id="L72">		return lastNAme;</span>
+	}
+
+	public void setLastNAme(String lastNAme) {
+<span class="nc" id="L76">		this.lastNAme = lastNAme;</span>
+<span class="nc" id="L77">	}</span>
+
+	public String getEmail() {
+<span class="nc" id="L80">		return email;</span>
+	}
+
+	public void setEmail(String email) {
+<span class="nc" id="L84">		this.email = email;</span>
+<span class="nc" id="L85">	}</span>
+
+	public String toString() {
+<span class="fc" id="L88">		return &quot;id:&quot; + id + &quot; first name:&quot; + firstName + &quot; lastNAme:&quot; + lastNAme;</span>
+	}
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L93">		final int prime = 31;</span>
+<span class="nc" id="L94">		int result = 1;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">		result = prime * result + ((email == null) ? 0 : email.hashCode());</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());</span>
+<span class="nc" id="L97">		result = prime * result + (int) (id ^ (id &gt;&gt;&gt; 32));</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">		result = prime * result + ((lastNAme == null) ? 0 : lastNAme.hashCode());</span>
+<span class="nc" id="L99">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="fc bfc" id="L104" title="All 2 branches covered.">		if (this == obj)</span>
+<span class="fc" id="L105">			return true;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">		if (obj == null)</span>
+<span class="nc" id="L107">			return false;</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L109">			return false;</span>
+<span class="fc" id="L110">		Customer other = (Customer) obj;</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">		if (email == null) {</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">			if (other.email != null)</span>
+<span class="nc" id="L113">				return false;</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">		} else if (!email.equals(other.email))</span>
+<span class="nc" id="L115">			return false;</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">		if (firstName == null) {</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">			if (other.firstName != null)</span>
+<span class="nc" id="L118">				return false;</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">		} else if (!firstName.equals(other.firstName))</span>
+<span class="nc" id="L120">			return false;</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">		if (id != other.id)</span>
+<span class="nc" id="L122">			return false;</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">		if (lastNAme == null) {</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">			if (other.lastNAme != null)</span>
+<span class="nc" id="L125">				return false;</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">		} else if (!lastNAme.equals(other.lastNAme))</span>
+<span class="nc" id="L127">			return false;</span>
+<span class="fc" id="L128">		return true;</span>
+	}
+
+
+}
+//
+//	
+//
+//}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

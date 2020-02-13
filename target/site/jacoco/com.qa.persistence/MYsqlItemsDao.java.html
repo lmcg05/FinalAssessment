@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MYsqlItemsDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.persistence</a> &gt; <span class="el_source">MYsqlItemsDao.java</span></div><h1>MYsqlItemsDao.java</h1><pre class="source lang-java linenums">package com.qa.persistence;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import org.apache.log4j.Logger;
+
+
+import domain.Items;
+
+
+
+public class MYsqlItemsDao implements Dao&lt;Items&gt;{
+<span class="nc" id="L19">	public static final Logger LOGGER = Logger.getLogger(MYsqlItemsDao.class);</span>
+	private Connection connection;
+
+<span class="nc" id="L22">	public MYsqlItemsDao(String username, String password) {</span>
+		try {
+<span class="nc" id="L24">		this.connection = DriverManager.getConnection(&quot;jdbc:mysql://35.225.56.59:3306/customerdomain&quot;, &quot;root&quot;, &quot;QA4312814&quot;);</span>
+<span class="nc" id="L25">	} catch (SQLException e) {</span>
+		// TODO Auto-generated catch block
+<span class="nc" id="L27">		LOGGER.error(e.getStackTrace());</span>
+<span class="nc" id="L28">	}</span>
+	
+		
+<span class="nc" id="L31">	}</span>
+
+	public Items create(Items t) {
+			try {
+<span class="nc" id="L35">	            Statement statement = connection.createStatement();</span>
+<span class="nc" id="L36">	            statement.executeUpdate(&quot;insert into items(items_name, price_per_items) values('&quot; + t.getItems_name()+ &quot;','&quot;  + t.getPrice_per_items() + &quot;')&quot; );</span>
+	            
+<span class="nc" id="L38">	            System.out.println(&quot;Items added complete&quot;);</span>
+<span class="nc" id="L39">	            LOGGER.info(&quot;Items created&quot;);</span>
+<span class="nc" id="L40">	            connection.close();</span>
+<span class="nc" id="L41">				} catch (Exception e) {</span>
+					//e.printStackTrace();
+<span class="nc" id="L43">					LOGGER.error(&quot;error inserting the items details&quot;);</span>
+<span class="nc" id="L44">				}</span>
+	            //logger.error(&quot;error inserting the customer details&quot;);
+//	        }
+<span class="nc" id="L47">			return null;</span>
+	    }
+		// TODO Auto-generated method stub
+
+	
+
+	public ArrayList&lt;Items&gt; readAll() {
+<span class="nc" id="L54">		ArrayList&lt;Items&gt; items = new ArrayList&lt;Items&gt;();</span>
+		try {
+			
+<span class="nc" id="L57">			Statement statement = connection.createStatement();</span>
+<span class="nc" id="L58">			ResultSet resultSet = statement.executeQuery(&quot;select * from items&quot;);</span>
+			
+<span class="nc bnc" id="L60" title="All 2 branches missed.">			while (resultSet.next()) {</span>
+				
+<span class="nc" id="L62">				int id = resultSet.getInt(&quot;items_ID&quot;);</span>
+<span class="nc" id="L63">				String items_name = resultSet.getString(&quot;items_name&quot;);// ensure that this matches the MySQL table name</span>
+<span class="nc" id="L64">				Double price_per_items = resultSet.getDouble(&quot;price_per_items&quot;);</span>
+				//String email = resultSet.getString(&quot;cust_email&quot;);//edit
+				//Long mobile = resultSset.getLong(&quot;cust_mobile&quot;);//edit
+				
+				
+<span class="nc" id="L69">				items.add(new Items(id, items_name, price_per_items));</span>
+						///* email, mobile*/;
+				
+<span class="nc" id="L72">			}</span>
+<span class="nc" id="L73">		} catch (Exception e) {</span>
+<span class="nc" id="L74">			LOGGER.error(&quot;error displaying the list of items&quot;);</span>
+<span class="nc" id="L75">		}</span>
+<span class="nc" id="L76">		return items;</span>
+	}
+       
+	public Items update(long id, Items t) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L81">		int items_ID = (int)id;</span>
+<span class="nc" id="L82">		String sql = &quot;UPDATE items set items_name = ?,price_per_items = ? where items_ID = ?&quot;;;</span>
+		try {
+<span class="nc" id="L84">			PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L85">			stmt.setString(1, t.getItems_name());</span>
+//			stmt.setString(2, customer.getLastName());
+<span class="nc" id="L87">			stmt.setDouble(2, t.getPrice_per_items()); // the numbers corresponds to the sql statements &quot;?&quot;</span>
+<span class="nc" id="L88">			stmt.setLong(3, t.getId());</span>
+<span class="nc" id="L89">			stmt.execute();</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">			if(items_ID==0) {</span>
+<span class="nc" id="L91">				LOGGER.error(&quot;This item does not exist in the database&quot;);</span>
+			}else {
+<span class="nc" id="L93">				LOGGER.info(&quot;Update complete&quot;);</span>
+			}
+<span class="nc" id="L95">		} catch (Exception e) {</span>
+<span class="nc" id="L96">			 LOGGER.error(&quot;Update failed&quot;);</span>
+			
+<span class="nc" id="L98">		}</span>
+<span class="nc" id="L99">		return null;</span>
+	}
+	
+
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L105">		String sql = &quot;DELETE FROM items WHERE items_ID = ?&quot;;</span>
+		try {
+<span class="nc" id="L107">			PreparedStatement stmt = connection.prepareStatement(sql);</span>
+<span class="nc" id="L108">			stmt.setLong(1, id);</span>
+<span class="nc" id="L109">			stmt.execute();</span>
+<span class="nc" id="L110">			System.out.println(&quot;Delete complete &quot;);</span>
+<span class="nc" id="L111">			connection.close();</span>
+<span class="nc" id="L112">		} catch (Exception e) {</span>
+<span class="nc" id="L113">		LOGGER.info(e);</span>
+<span class="nc" id="L114">		}</span>
+		
+	
+	
+	
+		
+<span class="nc" id="L120">	}</span>
+
+	@Override
+	public Items update(Items t) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L125">		return null;</span>
+	}
+
+	
+}
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

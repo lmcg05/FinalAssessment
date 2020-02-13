@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderLine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">domain</a> &gt; <span class="el_source">OrderLine.java</span></div><h1>OrderLine.java</h1><pre class="source lang-java linenums">package domain;
+
+public class OrderLine {
+	private long id;
+	private long orders_ID;
+	private long items_ID;
+	private int quantity;
+<span class="nc" id="L8">	public OrderLine(long orders_ID, long items_ID, int quantity) {</span>
+<span class="nc" id="L9">		this.orders_ID= orders_ID;</span>
+<span class="nc" id="L10">		this.items_ID= items_ID;</span>
+<span class="nc" id="L11">		this.quantity=quantity;</span>
+<span class="nc" id="L12">	}</span>
+	
+	
+	public long getId() {
+<span class="nc" id="L16">		return id;</span>
+	}
+	public void setId(long id) {
+<span class="nc" id="L19">		this.id = id;</span>
+<span class="nc" id="L20">	}</span>
+	public long getOrders_ID() {
+<span class="nc" id="L22">		return orders_ID;</span>
+	}
+	public void setOrders_ID(long orders_ID) {
+<span class="nc" id="L25">		this.orders_ID = orders_ID;</span>
+<span class="nc" id="L26">	}</span>
+	public long getItems_ID() {
+<span class="nc" id="L28">		return items_ID;</span>
+	}
+	public void setItems_ID(long items_ID) {
+<span class="nc" id="L31">		this.items_ID = items_ID;</span>
+<span class="nc" id="L32">	}</span>
+	public int getQuantity() {
+<span class="nc" id="L34">		return quantity;</span>
+	}
+	public void setQuantity(int quantity) {
+<span class="nc" id="L37">		this.quantity = quantity;</span>
+<span class="nc" id="L38">	}</span>
+	
+
+<span class="nc" id="L41">	public OrderLine(long id, long orders_ID, long items_ID, int quantity) {</span>
+<span class="nc" id="L42">		this.orders_ID= orders_ID;</span>
+<span class="nc" id="L43">		this.items_ID=items_ID;</span>
+<span class="nc" id="L44">		this.quantity=quantity;</span>
+<span class="nc" id="L45">	}</span>
+	
+	
+	public String toString() {
+<span class="nc" id="L49">		return &quot;\n&quot;+ &quot;OrderId &quot; + orders_ID + &quot;\n&quot;+ &quot;ItemId: &quot; + items_ID +&quot;\n&quot;+ &quot;quantity: &quot; + quantity+&quot;\n&quot;+ &quot;....................................................&quot; ;</span>
+	}
+	
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
