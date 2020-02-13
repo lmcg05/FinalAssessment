@@ -49,10 +49,15 @@ public class Items {
 	public Items(String itemName, Double itemPrice, Long itemQuantity) {
 		// TODO Auto-generated constructor stub
 	}
+	public Items(long l, String items_name2, String string) {
+		// TODO Auto-generated constructor stub
+	}
+	public Items(long id2, String items_name2, double price_per_items2) {
+		// TODO Auto-generated constructor stub
+	}
 	public long getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -80,6 +85,38 @@ public class Items {
 	}
 	public String toString() {
 		return "id:" + id + " items_name:"+ items_name + " price_per_items:" + price_per_items;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((items_name == null) ? 0 : items_name.hashCode());
+		result = prime * result + ((price_per_items == null) ? 0 : price_per_items.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Items other = (Items) obj;
+		if (id != other.id)
+			return false;
+		if (items_name == null) {
+			if (other.items_name != null)
+				return false;
+		} else if (!items_name.equals(other.items_name))
+			return false;
+		if (price_per_items == null) {
+			if (other.price_per_items != null)
+				return false;
+		} else if (!price_per_items.equals(other.price_per_items))
+			return false;
+		return true;
 	}
 	
 }
