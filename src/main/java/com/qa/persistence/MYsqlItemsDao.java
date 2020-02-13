@@ -26,7 +26,6 @@ public class MYsqlItemsDao implements Dao<Items>{
 		// TODO Auto-generated catch block
 		LOGGER.error(e.getStackTrace());
 	}
-	
 		
 	}
 
