@@ -1412,3 +1412,15 @@
 2020-02-13 22:11:19 INFO  OrderController:59 - Please enter price of item
 2020-02-13 22:11:23 INFO  OrderController:50 - Please enter item id or enter 0 if order is complete:
 2020-02-13 22:11:34 INFO  OrderController:56 - Please enter quantity of item
+2020-02-13 23:45:41 INFO  CustomerController:35 - id:null firstName:Chris lastName:P email:null
+2020-02-13 23:45:41 INFO  CustomerController:35 - id:null firstName:Rhys lastName:T email:null
+2020-02-13 23:45:41 INFO  CustomerController:35 - id:null firstName:Nic lastName:J email:null
+2020-02-13 23:45:41 INFO  CustomerController:56 - Please enter the id of the customer you would like to update
+2020-02-13 23:45:41 INFO  CustomerController:58 - Please enter a first name
+2020-02-13 23:45:41 INFO  CustomerController:60 - Please enter a surname
+2020-02-13 23:45:41 INFO  CustomerController:63 - Customer Updated
+2020-02-13 23:45:41 INFO  CustomerController:43 - Please enter a first name
+2020-02-13 23:45:41 INFO  CustomerController:45 - Please enter a surname
+2020-02-13 23:45:41 INFO  CustomerController:47 - Please enter an email
+2020-02-13 23:45:41 INFO  CustomerController:50 - Customer created
+2020-02-13 23:45:41 INFO  CustomerController:69 - Please enter the id of the customer you would like to delete
