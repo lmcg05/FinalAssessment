@@ -26,7 +26,7 @@ public class MysqlOrderLineDao implements OrderLineDao<OrderLine>{
 			// TODO Auto-generated catch block
 			LOGGER.error(e.getStackTrace());
 		}
-		
+
 		
 	}
 		

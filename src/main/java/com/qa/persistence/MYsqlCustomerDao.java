@@ -27,7 +27,7 @@ public class MYsqlCustomerDao implements Dao<Customer>{
 			// TODO Auto-generated catch block
 			LOGGER.error(e.getStackTrace());
 		}
-		
+	
 		
 	}
 
@@ -36,7 +36,7 @@ public class MYsqlCustomerDao implements Dao<Customer>{
 			try {	
 	            
 				statement = connection.createStatement();
-	            statement.executeUpdate("insert into customer(email, firstName, lastName) values('" + t.getEmail()+ "','" + t.getFirstName() + "','" + t.getLastNAme() + "')" );
+	            statement.executeUpdate("insert into customer(email, firstName, lastName) values('" + t.getEmail()+ "','" + t.getFirstName() + "','" + t.getLastName() + "')" );
 	            //logger.info("Customer created");
 	            System.out.println("Customer added complete");
 	            LOGGER.info("Customer created");
@@ -68,7 +68,7 @@ public class MYsqlCustomerDao implements Dao<Customer>{
 			
 			while (resultSet.next()) {
 				
-				int id = resultSet.getInt("customer_ID");
+				long id = resultSet.getInt("customer_ID");
 				String firstName = resultSet.getString("firstName");// ensure that this matches the MySQL table name
 				String lastName = resultSet.getString("lastName");
 				String email = resultSet.getString("email");
@@ -94,7 +94,7 @@ public class MYsqlCustomerDao implements Dao<Customer>{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, t.getEmail());
 			stmt.setString(2, t.getFirstName()); // the numbers corresponds to the sql statements "?"
-			stmt.setString(3, t.getLastNAme());
+			stmt.setString(3, t.getLastName());
 			stmt.setLong(4, t.getId());
 			stmt.execute();
 			if(customer_ID==0) {

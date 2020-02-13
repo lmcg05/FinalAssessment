@@ -167,7 +167,7 @@ public class MysqlOrdersDao implements Dao<Order> {
 			checkConnection();
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, v.getFirstName());
-			stmt.setString(2, v.getLastNAme());
+			stmt.setString(2, v.getLastName());
 			stmt.setString(3, v.getEmail());
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()) {

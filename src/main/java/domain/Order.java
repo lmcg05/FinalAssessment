@@ -20,8 +20,7 @@ public class Order {
 			// TODO Auto-generated constructor stub
 			this.customer_ID = customer_ID;
 			this.price = price;
-			this.id = id;
-			
+			this.id = id;			
 			
 	}
 	public Order(long custId, float floatCost) {
@@ -80,9 +79,13 @@ public class Order {
 
 	public void setCustomer_ID(long customer_ID) {
 		this.customer_ID = customer_ID;
-	}
 	
+	
+}
+	public String toString() {
+		return "id:" + id + " price:" + price + " customer_ID:" + customer_ID + " totalQuantity:" + totalQuantity + " totalPrice:" + totalPrice;	
 
 
 	
+}
 }

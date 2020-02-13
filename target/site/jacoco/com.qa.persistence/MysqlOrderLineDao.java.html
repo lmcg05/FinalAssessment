@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MysqlOrderLineDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.persistence</a> &gt; <span class="el_source">MysqlOrderLineDao.java</span></div><h1>MysqlOrderLineDao.java</h1><pre class="source lang-java linenums">package com.qa.persistence;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import domain.OrderLine;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class MysqlOrderLineDao implements OrderLineDao&lt;OrderLine&gt;{
+	
+<span class="nc" id="L19">	public static final Logger LOGGER = Logger.getLogger(MysqlOrderLineDao.class);</span>
+	private Connection connection;
+
+<span class="nc" id="L22">	public MysqlOrderLineDao(String username, String password)  {</span>
+		try {
+<span class="nc" id="L24">			this.connection = DriverManager.getConnection(&quot;jdbc:mysql://35.225.56.59:3306/customerdomain&quot;, username, password);</span>
+<span class="nc" id="L25">		} catch (SQLException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L27">			LOGGER.error(e.getStackTrace());</span>
+<span class="nc" id="L28">		}</span>
+
+		
+<span class="nc" id="L31">	}</span>
+		
+
+	public List&lt;OrderLine&gt; readAll() {
+<span class="nc" id="L35">		ArrayList&lt;OrderLine&gt; orderLineList = new ArrayList&lt;OrderLine&gt;();</span>
+		try {
+			
+<span class="nc" id="L38">			Statement statement = connection.createStatement();</span>
+<span class="nc" id="L39">			ResultSet resultSet = statement.executeQuery(&quot;select * from OrderLine&quot;);</span>
+			
+			
+<span class="nc bnc" id="L42" title="All 2 branches missed.">			while (resultSet.next()) {</span>
+<span class="nc" id="L43">				Long id = (long) resultSet.getInt(&quot;id&quot;);</span>
+<span class="nc" id="L44">				long orders_ID = (long)resultSet.getInt(&quot;order_ID&quot;);</span>
+<span class="nc" id="L45">				long items_ID = (long)resultSet.getInt(&quot;order_ID&quot;);</span>
+<span class="nc" id="L46">				int quantity =  resultSet.getInt(&quot;quantity&quot;);</span>
+<span class="nc" id="L47">			OrderLine orderLine = new OrderLine(id, orders_ID, items_ID, quantity);</span>
+<span class="nc" id="L48">				orderLineList.add(orderLine);</span>
+<span class="nc" id="L49">			}</span>
+<span class="nc" id="L50">		} catch (Exception e) {</span>
+<span class="nc" id="L51">			LOGGER.error(&quot;error displaying the list of items&quot;);</span>
+<span class="nc" id="L52">		}</span>
+<span class="nc" id="L53">		return orderLineList;</span>
+	}
+
+	public void create(OrderLine t) {
+		try {
+			
+<span class="nc" id="L59">			Statement statement = connection.createStatement();</span>
+<span class="nc" id="L60">			statement.executeUpdate(&quot;insert into orderline(orders_ID, items_ID, quantity) values('&quot; + t.getOrders_ID() + &quot;','&quot; +t.getItems_ID()+ &quot;','&quot;+t.getQuantity()+ &quot;')&quot; );</span>
+<span class="nc" id="L61">			LOGGER.info(&quot;Orderline created&quot;);</span>
+<span class="nc" id="L62">		} catch (Exception e) {</span>
+<span class="nc" id="L63">			LOGGER.error(&quot;error inserting to orderline table&quot;);</span>
+<span class="nc" id="L64">		} </span>
+<span class="nc" id="L65">	}</span>
+
+
+
+	@Override
+	public void update(long id, OrderLine t) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L73">	}</span>
+
+	@Override
+	public void delete(OrderLine t) {
+		// TODO Auto-generated method stub
+		
+<span class="nc" id="L79">	}</span>
+
+	@Override
+	public long getOrderIdForOrderLine(long custId, double price) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L84">		return 0;</span>
+	
+	}
+
+	
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

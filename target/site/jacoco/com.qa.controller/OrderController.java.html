@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laurence-ims</a> &gt; <a href="index.source.html" class="el_package">com.qa.controller</a> &gt; <span class="el_source">OrderController.java</span></div><h1>OrderController.java</h1><pre class="source lang-java linenums">package com.qa.controller;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
+
+
+import com.qa.services.CrudServices;
+import com.qa.services.GetCustomerId;
+import com.qa.services.GetItemId;
+import com.qa.services.GetOrderDetails;
+
+import com.qa.services.OrderService;
+
+import Utils.Utils;
+import domain.Customer;
+import domain.Items;
+import domain.Order;
+import domain.OrderLine;
+
+public class OrderController implements CrudController&lt;Order&gt;{
+<span class="nc" id="L25">	public static final Logger LOGGER = Logger.getLogger(OrderController.class);</span>
+
+	private CrudServices&lt;Order&gt; orderService;
+<span class="nc" id="L28">	public OrderController(CrudServices&lt;Order&gt; orderService) {</span>
+<span class="nc" id="L29">		this.orderService = orderService;</span>
+<span class="nc" id="L30">	}</span>
+	String getInput() {
+<span class="nc" id="L32">		return Utils.getInput();</span>
+	}
+	public List&lt;Order&gt; readAll() {
+<span class="nc" id="L35">		List&lt;Order&gt; order = orderService.readAll();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">		for(Order orders: order) {</span>
+<span class="nc" id="L37">			LOGGER.info(orders.toString());</span>
+<span class="nc" id="L38">		}</span>
+<span class="nc" id="L39">		return order;</span>
+	}
+	public Order create(){
+<span class="nc" id="L42">		LOGGER.info(&quot;Enter customer id:&quot;);</span>
+<span class="nc" id="L43">		Long id =Long.valueOf(Utils.getInput());</span>
+<span class="nc" id="L44">		Double totalPrice = 0.00;</span>
+<span class="nc" id="L45">		Long totalQuantity = 0L;</span>
+<span class="nc" id="L46">		ArrayList&lt;Long&gt; items = new ArrayList&lt;Long&gt;();</span>
+<span class="nc" id="L47">		ArrayList&lt;Long&gt; quantity = new ArrayList&lt;Long&gt;();</span>
+<span class="nc" id="L48">		ArrayList&lt;Double&gt; price = new ArrayList&lt;Double&gt;();</span>
+		while (true) {
+<span class="nc" id="L50">			LOGGER.info(&quot;Please enter item id or enter 0 if order is complete:&quot;  );</span>
+<span class="nc" id="L51">			Long l = Long.valueOf(Utils.getInput());</span>
+<span class="nc" id="L52">			items.add(l);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">			if(l==0) {</span>
+<span class="nc" id="L54">				break;</span>
+			}
+<span class="nc" id="L56">			LOGGER.info(&quot;Please enter quantity of item&quot;);</span>
+<span class="nc" id="L57">			Long i = Long.valueOf(Utils.getInput());</span>
+<span class="nc" id="L58">			quantity.add(i);</span>
+<span class="nc" id="L59">			LOGGER.info(&quot;Please enter price of item&quot;);</span>
+<span class="nc" id="L60">			Double j = Double.valueOf(Utils.getInput());</span>
+<span class="nc" id="L61">			price.add(j);</span>
+<span class="nc" id="L62">			}</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">			for(int k=0; k&lt;quantity.size();k++) {</span>
+<span class="nc" id="L64">				Double price1 =(quantity.get(k))* (price.get(k));</span>
+<span class="nc" id="L65">				totalPrice= totalPrice+price1;</span>
+<span class="nc" id="L66">				totalQuantity += quantity.get(k);</span>
+			}
+<span class="nc" id="L68">			orderService.create((new Order(id, totalQuantity, totalPrice)));</span>
+<span class="nc" id="L69">			LOGGER.info(&quot;Order created successfully&quot;);</span>
+<span class="nc" id="L70">			return null;</span>
+		}
+	public Order update() {
+<span class="nc" id="L73">		LOGGER.info(&quot;Please enter the id of the order you would like to update&quot;);</span>
+<span class="nc" id="L74">		Long id = Long.valueOf(Utils.getInput());</span>
+<span class="nc" id="L75">		LOGGER.info(&quot;Please enter customer id&quot;);</span>
+<span class="nc" id="L76">		Long customerId = Long.valueOf(Utils.getInput());</span>
+<span class="nc" id="L77">		LOGGER.info(&quot;Please enter totalQuantity&quot;);</span>
+<span class="nc" id="L78">		Long totalQuantity = Long.valueOf(Utils.getInput());</span>
+<span class="nc" id="L79">		LOGGER.info(&quot;Please enter totalPrice&quot;);</span>
+<span class="nc" id="L80">		Double actualPrice = Double.valueOf(Utils.getInput());</span>
+<span class="nc" id="L81">		orderService.update(new Order(customerId, totalQuantity, actualPrice));</span>
+<span class="nc" id="L82">		LOGGER.info(&quot;Order updated successfully&quot;);</span>
+<span class="nc" id="L83">		return null;</span>
+	}
+	public void delete() {
+<span class="nc" id="L86">		LOGGER.info(&quot;Please enter the id of the order you would like to delete&quot;);</span>
+<span class="nc" id="L87">		Long id = Long.valueOf(Utils.getInput());</span>
+<span class="nc" id="L88">		orderService.delete(id);</span>
+<span class="nc" id="L89">	}</span>
+
+////	private CrudServices&lt;Order&gt; orderService;
+//	
+//	String getInput() {
+//		return Utils.getInput();
+//	}
+//
+//	public List&lt;Order&gt; readAll() {
+//		// TODO Auto-generated method stub
+//		List&lt;Order&gt; order = OrderService.readAll();
+//		for (@SuppressWarnings(&quot;unused&quot;) Order orders : order) {
+//			LOGGER.info(order.toString());
+//		}
+////		return order;
+
+	
+
+//	
+//	public Order create() {
+//		ArrayList&lt;Long&gt; listId = new ArrayList&lt;Long&gt;();
+//		ArrayList&lt;Integer&gt; quantityList = new ArrayList&lt;Integer&gt;();
+//		double totalPrice = 0.00;
+//		long customer_ID = getCustomer_ID();
+//		itemsDisplay();
+//		while(true) {
+//			LOGGER.info(&quot;Please enter the item name. Enter submit to complete purchase &quot;);
+//			itemName = Utils.getInput();
+//			if(itemName.equalsIgnoreCase(&quot;submit&quot;)) {
+//				LOGGER.info(&quot;Order submitted&quot;);
+//				break;
+//			}
+//			long id = getItem_ID();
+//			listId.add(id);
+//			double price = getOrderDetails.itemPrice(new Items(itemName, totalPrice));
+//			LOGGER.info(&quot;Enter the quantity&quot;);
+//			String quantity = Utils.getInput();
+//			int parseInteger = Integer.parseInt(quantity);
+//			quantityList.add(parseInteger);
+//			double totalPriceForEachItem = parseInteger * price;
+//			totalPrice = totalPrice + totalPriceForEachItem;
+//		}
+//		orderService.create(new Order((long) totalPrice,customer_ID));
+//		LOGGER.info(&quot;\nShoppingCart Total :&quot; + totalPrice);
+//		try {
+//			TimeUnit.SECONDS.sleep(30);
+//		}catch (InterruptedException e) {
+//			LOGGER.info(e);
+//		}
+//		DecimalFormat df = new DecimalFormat(&quot;0.00&quot;);
+//		double total = Double.parseDouble(df.format(totalPrice));
+//		long result = getOrder_ID(customer_ID,total);
+//		LOGGER.info(&quot;order id = &quot; + result);
+//		if(result !=0) {
+//			for(int i=0; i&lt;quantityList.size(); i++) {
+//				LOGGER.info(&quot;List of id&quot; + listId.get(i));
+//				LOGGER.info(&quot;list of quantity&quot; + quantityList.get(i));
+//				orderLineCreate1(result, listId.get(i), quantityList.get(i));
+//			}
+//		}
+//		return null;
+//	}
+//	public Order update() {
+//		LOGGER.info(&quot;Please enter the ID of the order you want to update&quot;);
+//		String id = Utils.getInput();
+//		long num = Long.parseLong(id);
+//		LOGGER.info(&quot;Please enter the updated customer ID&quot;);
+//		String customer_ID = Utils.getInput();
+//		long custId = Long.parseLong(customer_ID);
+//		LOGGER.info(&quot;Please enter the updated order cost&quot;);
+//		String cost = Utils.getInput();
+//		float floatCost = Float.parseFloat(cost);
+//		return orderService.update(new Order(custId, floatCost));
+	
+
+////	public Order update() {
+//		// TODO Auto-generated method stub
+//		LOGGER.info(&quot;Please enter the ID of the order you would like to update&quot;);
+//		Long id = Long.valueOf(getInput());
+//		LOGGER.info(&quot;Please enter the ID of the customer you would like to update&quot;);
+//		Long customer_ID = Long.valueOf(getInput());
+//		LOGGER.info(&quot;Please enter a price_per_items&quot;);
+//		Double price = Double.valueOf(getInput());
+//		Order order = OrderService.update(new Order(id, price, customer_ID));
+//		LOGGER.info(&quot;order List Updated&quot;);
+////		return order;
+	}
+//	public void delete() {
+//		LOGGER.info(&quot;Please enter the order ID&quot;);
+//		String id = Utils.getInput();
+//		long num = Long.parseLong(id);
+//		orderService.delete(num);
+//	}
+//	public CrudServices&lt;Order&gt; getOrderService() {
+//		return orderService;
+//	}
+//	public void setOrderService(CrudServices&lt;Order&gt; orderService) {
+//		this.orderService = orderService;
+//	}
+//	public List&lt;Order&gt; orderDetailsDisplay1(long id) {
+//		List&lt;Order&gt; orders = new ArrayList&lt;Order&gt;();
+//		orders = getOrderDetails.orderDetailsDisplay(id);
+//		return orders;
+//	}
+//	public long getItemId() {
+//		long itemId = getItemId.getItem_ID(new Items(itemName, null));
+//		 return itemId;
+//	}
+//	public long getCustomerId() {
+//		LOGGER.info(&quot;Please enter your first name&quot;);
+//		String firstName = Utils.getInput();
+//		while (firstName.matches(&quot;.*\\d.*&quot;)) {
+//			LOGGER.info(&quot;Please enter your first name&quot;);
+//			firstName = Utils.getInput();
+//		}
+//		LOGGER.info(&quot;Please enter your last name&quot;);
+//		String lastName = Utils.getInput();
+//		while (firstName.matches(&quot;.*\\d.*&quot;)) {
+//			LOGGER.info(&quot;Please enter your last name&quot;);
+//			lastName = Utils.getInput();
+//		}
+//		long customerId = getCustomerId.getCustomer_ID(new Customer(firstName,lastName));
+//		return customerId;
+//	}
+//	public void itemDisplay() {
+//		for (Items items : getOrderDetails.itemsDisplay()) {
+//			LOGGER.info(items.toString());
+//		}
+//	}
+//	public GetOrderDetails&lt;Order, Items, Customer&gt; getGetOrderDetails() {
+//		return getOrderDetails;
+//	}
+//	public void setGetOrderDetails(GetOrderDetails&lt;Order, Items, Customer&gt; getOrderDetails) {
+//		this.getOrderDetails = getOrderDetails;
+//	}
+//	public GetCustomerId&lt;Customer&gt; getGetCustomerId() {
+//		return getCustomerId;
+//	}
+//	public void setGetCustomerId(GetCustomerId&lt;Customer&gt; getCustomerId) {
+//		this.getCustomerId = getCustomerId;
+//	}
+//	public GetItemId&lt;Items&gt; getGetItemId() {
+//		return getItemId;
+//	}
+//	public void setGetItemId(GetItemId&lt;Items&gt; getItemId) {
+//		this.getItemId = getItemId;
+//	}
+//	
+//	public void orderLineCreate1(long orderID, long itemId, int quantity) {
+//		orderLineService.create(new OrderLine(orderID, itemId, quantity));
+//	}
+
+////	public void delete() {
+//		// TODO Auto-generated method stub
+//		LOGGER.info(&quot;Please enter the ID of the item you would like to delete&quot;);
+//		Long id = Long.valueOf(getInput());
+////		OrderService.delete(id);
+	
+
+////	@Override
+//	public Order create() {
+//		// TODO Auto-generated method stub
+//		return null;
+////	}
+
+	
+	
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
