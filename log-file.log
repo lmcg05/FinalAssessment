@@ -1392,3 +1392,23 @@
 2020-02-13 21:14:00 INFO  CustomerController:47 - Please enter an email
 2020-02-13 21:14:00 INFO  CustomerController:50 - Customer created
 2020-02-13 21:14:00 INFO  CustomerController:69 - Please enter the id of the customer you would like to delete
+2020-02-13 22:09:52 INFO  Ims:25 - What is your username
+2020-02-13 22:10:00 INFO  Ims:25 - What is your username
+2020-02-13 22:10:03 INFO  Ims:27 - What is your password
+2020-02-13 22:10:06 INFO  Ims:34 - Which entity would you like to use?
+2020-02-13 22:10:06 INFO  Domain:29 - CUSTOMER: Information about customers
+2020-02-13 22:10:06 INFO  Domain:29 - ITEM: Individual Items
+2020-02-13 22:10:06 INFO  Domain:29 - ORDER: Purchases of items
+2020-02-13 22:10:06 INFO  Domain:29 - STOP: To close the application
+2020-02-13 22:10:09 INFO  Ims:41 - What would you like to do with order:
+2020-02-13 22:10:09 INFO  Action:34 - CREATE: To save a new item into the database
+2020-02-13 22:10:09 INFO  Action:34 - READ: To read an item from the database
+2020-02-13 22:10:09 INFO  Action:34 - UPDATE: To change an item already in the database
+2020-02-13 22:10:09 INFO  Action:34 - DELETE: To remove an item from the database
+2020-02-13 22:10:09 INFO  Action:34 - RETURN: To return to domain selection
+2020-02-13 22:10:18 INFO  OrderController:42 - Enter customer id:
+2020-02-13 22:10:58 INFO  OrderController:50 - Please enter item id or enter 0 if order is complete:
+2020-02-13 22:11:04 INFO  OrderController:56 - Please enter quantity of item
+2020-02-13 22:11:19 INFO  OrderController:59 - Please enter price of item
+2020-02-13 22:11:23 INFO  OrderController:50 - Please enter item id or enter 0 if order is complete:
+2020-02-13 22:11:34 INFO  OrderController:56 - Please enter quantity of item
