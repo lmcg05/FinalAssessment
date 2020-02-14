@@ -58,7 +58,6 @@ public class MYsqlCustomerDao implements Dao<Customer> {
 		ArrayList<Customer> customers = new ArrayList<Customer>();
 		Statement statement = null;
 		try {
-
 			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from customer");
 

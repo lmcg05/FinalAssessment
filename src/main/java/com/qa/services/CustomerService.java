@@ -10,10 +10,12 @@ public class CustomerService implements CrudServices<Customer> {
 
 	Dao<Customer> customerDao;
 
+private Dao<Customer> customerDao1;
+	
 	public CustomerService(Dao<Customer> customerDao) {
 		this.customerDao = customerDao;
 	}
-
+	
 	public List<Customer> readAll() {
 		return customerDao.readAll();
 	}
@@ -28,11 +30,6 @@ public class CustomerService implements CrudServices<Customer> {
 
 	public void delete(Long id) {
 		customerDao.delete(id);
-	}
-
-	public Customer update(Long id, Customer t) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

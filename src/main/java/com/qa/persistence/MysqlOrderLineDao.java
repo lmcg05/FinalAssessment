@@ -29,14 +29,16 @@ public class MysqlOrderLineDao implements OrderLineDao<OrderLine> {
 			LOGGER.error(e.getStackTrace());
 		}
 
-	
+
 	}
 
+	@SuppressWarnings("finally")
 	public List<OrderLine> readAll() {
 		ArrayList<OrderLine> orderLineList = new ArrayList<OrderLine>();
+		Statement statement = null;
 		try {
 
-			Statement statement = connection.createStatement();
+			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from OrderLine");
 
 			while (resultSet.next()) {
@@ -49,19 +51,36 @@ public class MysqlOrderLineDao implements OrderLineDao<OrderLine> {
 			}
 		} catch (Exception e) {
 			LOGGER.error("error displaying the list of items");
+		}finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e) {
+				LOGGER.error(e.getStackTrace());
 		}
 		return orderLineList;
+		}
 	}
 
 	public void create(OrderLine t) {
+		Statement statement = null;
 		try {
 
-			Statement statement = connection.createStatement();
+			statement = connection.createStatement();
 			statement.executeUpdate("insert into orderline(orders_ID, items_ID, quantity) values('" + t.getOrders_ID()
 					+ "','" + t.getItems_ID() + "','" + t.getQuantity() + "')");
 			LOGGER.info("Orderline created");
 		} catch (Exception e) {
 			LOGGER.error("error inserting to orderline table");
+		} finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e) {
+				LOGGER.error(e.getStackTrace());
+			}
 		}
 	}
 
