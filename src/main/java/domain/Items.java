@@ -11,53 +11,51 @@ public class Items {
 //	private String email;
 //	private Long mobile;
 //	public int getSurname;
-	
+
 	public Items(int id, String items_name, Double price_per_items) {
-	//		*/ String email, Long mobile*/
+		// */ String email, Long mobile*/
 		// TODO Auto-generated constructor stub
-		this.id=id;
+		this.id = id;
 		this.items_name = items_name;
 		this.price_per_items = price_per_items;
-//		this.firstName=firstName;
-//		this.surname=surname;
-//		this.email=email;
-//		this.mobile=mobile;
-//		
 
 	}
-	public Items( String items_name, Double price_per_items) {
-		//		*/ String email, Long mobile*/
-			// TODO Auto-generated constructor stub
-			this.items_name = items_name;
-			this.price_per_items = price_per_items;
-			
+
+	public Items(String items_name, Double price_per_items) {
+		// */ String email, Long mobile*/
+		// TODO Auto-generated constructor stub
+		this.items_name = items_name;
+		this.price_per_items = price_per_items;
+
 	}
 
-	
 	public Items(Long id, String items_name, Double price_per_items) {
 		// TODO Auto-generated constructor stub
-		this.id=id;
+		this.id = id;
 		this.items_name = items_name;
 		this.price_per_items = price_per_items;
 	}
 
-
-	
 	public Items(Object itemName) {
 		// TODO Auto-generated constructor stub
 	}
+
 	public Items(String itemName, Double itemPrice, Long itemQuantity) {
 		// TODO Auto-generated constructor stub
 	}
+
 	public Items(long l, String items_name2, String string) {
 		// TODO Auto-generated constructor stub
 	}
+
 	public Items(long id2, String items_name2, double price_per_items2) {
 		// TODO Auto-generated constructor stub
 	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -77,15 +75,12 @@ public class Items {
 	public void setPrice_per_items(Double price_per_items) {
 		this.price_per_items = price_per_items;
 
-		
 	}
-	public void add(ArrayList<Items> items) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	public String toString() {
-		return "id:" + id + " items_name:"+ items_name + " price_per_items:" + price_per_items;
+		return "id:" + id + " items_name:" + items_name + " price_per_items:" + price_per_items;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -95,6 +90,7 @@ public class Items {
 		result = prime * result + ((price_per_items == null) ? 0 : price_per_items.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -117,8 +113,12 @@ public class Items {
 		} else if (!price_per_items.equals(other.price_per_items))
 			return false;
 		return true;
+
 	}
-	
+
+	public static void add(Items items) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
-
-

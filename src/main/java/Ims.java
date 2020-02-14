@@ -18,6 +18,7 @@ import com.qa.services.ItemsService;
 import com.qa.services.OrderService;
 
 import Utils.Utils;
+
 public class Ims {
 	public static final Logger LOGGER = Logger.getLogger(Ims.class);
 
@@ -26,45 +27,47 @@ public class Ims {
 		String username = Utils.getInput();
 		LOGGER.info("What is your password");
 		String password = Utils.getInput();
-		
+
 		boolean looper = true;
 		while (looper) {
-			
-		
-		LOGGER.info("Which entity would you like to use?");
-		Domain.printDomains();
-		
-		Domain domain = Domain.getDomain();
-		Action action = null;
-		
-		if (domain != Domain.STOP) {
-			LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
-			Action.printActions();
-			action = Action.getAction();
-		}
-		
-		switch (domain) {
-		case CUSTOMER:
-			CustomerController customerController = new CustomerController(new CustomerService(new MYsqlCustomerDao(username, password)));
-			doAction(customerController, action);
-			break;
-		case ITEM:
-			ItemsController itemsController = new ItemsController(new ItemsService(new MYsqlItemsDao(username, password)));
-			doAction(itemsController, action);
-			break;
-		case ORDER:
-			OrderController orderController = new OrderController(new OrderService(new MysqlOrdersDao(username, password)));
-			doAction(orderController, action);
-			break;
-		case STOP:
-			looper = false;
-			break;
-		default:
-			break;
-		}
+
+			LOGGER.info("Which entity would you like to use?");
+			Domain.printDomains();
+
+			Domain domain = Domain.getDomain();
+			Action action = null;
+
+			if (domain != Domain.STOP) {
+				LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
+				Action.printActions();
+				action = Action.getAction();
+			}
+
+			switch (domain) {
+			case CUSTOMER:
+				CustomerController customerController = new CustomerController(
+						new CustomerService(new MYsqlCustomerDao(username, password)));
+				doAction(customerController, action);
+				break;
+			case ITEM:
+				ItemsController itemsController = new ItemsController(
+						new ItemsService(new MYsqlItemsDao(username, password)));
+				doAction(itemsController, action);
+				break;
+			case ORDER:
+				OrderController orderController = new OrderController(
+						new OrderService(new MysqlOrdersDao(username, password)));
+				doAction(orderController, action);
+				break;
+			case STOP:
+				looper = false;
+				break;
+			default:
+				break;
+			}
 		}
 	}
-	
+
 	public void doAction(CrudController<?> crudController, Action action) {
 		switch (action) {
 		case CREATE:

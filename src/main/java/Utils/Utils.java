@@ -3,8 +3,8 @@ package Utils;
 import java.util.Scanner;
 
 public class Utils {
-private Utils () {
-		
+	private Utils() {
+
 	}
 
 	public static String getInput() {
@@ -12,7 +12,5 @@ private Utils () {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}
-	
 
 }
-

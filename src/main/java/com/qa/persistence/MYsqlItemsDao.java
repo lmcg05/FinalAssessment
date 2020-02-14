@@ -19,19 +19,23 @@ public class MYsqlItemsDao implements Dao<Items>{
 	public static final Logger LOGGER = Logger.getLogger(MYsqlItemsDao.class);
 	private Connection connection;
 
+
 	public MYsqlItemsDao(String username, String password) {
 		try {
-		this.connection = DriverManager.getConnection("jdbc:mysql://35.225.56.59:3306/customerdomain", "root", "QA4312814");
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		LOGGER.error(e.getStackTrace());
-	}
-		
+			this.connection = DriverManager.getConnection("jdbc:mysql://35.225.56.59:3306/customerdomain", username,
+					password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			LOGGER.error(e.getStackTrace());
+		}
+
 	}
 
+	@SuppressWarnings("finally")
 	public Items create(Items t) {
+		Statement statement = null;
 			try {
-	            Statement statement = connection.createStatement();
+	            statement = connection.createStatement();
 	            statement.executeUpdate("insert into items(items_name, price_per_items) values('" + t.getItems_name()+ "','"  + t.getPrice_per_items() + "')" );
 	            
 	            System.out.println("Items added complete");
@@ -40,20 +44,29 @@ public class MYsqlItemsDao implements Dao<Items>{
 				} catch (Exception e) {
 					//e.printStackTrace();
 					LOGGER.error("error inserting the items details");
+				}finally {
+					try {
+						if (statement != null) {
+							statement.close();
+						}
+					} catch (SQLException e) {
+						LOGGER.error(e.getStackTrace());
 				}
 	            //logger.error("error inserting the customer details");
 //	        }
 			return null;
 	    }
+	}
 		// TODO Auto-generated method stub
 
 	
 
 	public ArrayList<Items> readAll() {
 		ArrayList<Items> items = new ArrayList<Items>();
+		Statement statement = null;
 		try {
 			
-			Statement statement = connection.createStatement();
+			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from items");
 			
 			while (resultSet.next()) {
@@ -71,14 +84,24 @@ public class MYsqlItemsDao implements Dao<Items>{
 			}
 		} catch (Exception e) {
 			LOGGER.error("error displaying the list of items");
+		}finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e) {
+				LOGGER.error(e.getStackTrace());
+			}
 		}
 		return items;
 	}
        
+	@SuppressWarnings("finally")
 	public Items update(long id, Items t) {
 		// TODO Auto-generated method stub
 		int items_ID = (int)id;
 		String sql = "UPDATE items set items_name = ?,price_per_items = ? where items_ID = ?";;
+		Statement statement = null;
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, t.getItems_name());
@@ -93,15 +116,23 @@ public class MYsqlItemsDao implements Dao<Items>{
 			}
 		} catch (Exception e) {
 			 LOGGER.error("Update failed");
-			
+		}finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e) {
+				LOGGER.error(e.getStackTrace());
 		}
 		return null;
+		}
 	}
 	
 
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM items WHERE items_ID = ?";
+		Statement statement = null;
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setLong(1, id);
@@ -110,6 +141,14 @@ public class MYsqlItemsDao implements Dao<Items>{
 			connection.close();
 		} catch (Exception e) {
 		LOGGER.info(e);
+		}finally {
+			try {
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e) {
+				LOGGER.error(e.getStackTrace());
+		}
 		}
 		
 	
