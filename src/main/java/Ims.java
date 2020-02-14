@@ -1,21 +1,22 @@
 
 
+
+
 import org.apache.log4j.Logger;
 
 import com.qa.controller.Action;
 import com.qa.controller.CrudController;
 import com.qa.controller.CustomerController;
 import com.qa.controller.ItemsController;
-import com.qa.controller.OrderController;
+
 import com.qa.persistence.Domain;
 import com.qa.persistence.MYsqlCustomerDao;
 import com.qa.persistence.MYsqlItemsDao;
 
-import com.qa.persistence.MysqlOrdersDao;
 import com.qa.services.CustomerService;
 import com.qa.services.ItemsService;
 
-import com.qa.services.OrderService;
+
 
 import Utils.Utils;
 
@@ -55,9 +56,6 @@ public class Ims {
 				doAction(itemsController, action);
 				break;
 			case ORDER:
-				OrderController orderController = new OrderController(
-						new OrderService(new MysqlOrdersDao(username, password)));
-				doAction(orderController, action);
 				break;
 			case STOP:
 				looper = false;
