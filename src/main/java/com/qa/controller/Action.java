@@ -5,10 +5,8 @@ import org.apache.log4j.Logger;
 import Utils.Utils;
 
 public enum Action {
-	CREATE("To save a new item into the database"), 
-	READ("To read an item from the database"),
-	UPDATE("To change an item already in the database"), 
-	DELETE("To remove an item from the database"),
+	CREATE("To save a new item into the database"), READ("To read an item from the database"),
+	UPDATE("To change an item already in the database"), DELETE("To remove an item from the database"),
 	RETURN("To return to domain selection");
 
 	public static final Logger LOGGER = Logger.getLogger(Action.class);
@@ -36,8 +34,9 @@ public enum Action {
 	}
 
 	/**
-	 * Gets an action based on a users input.
-	 * If user enters a non-specified enumeration, it will ask for another input.
+	 * Gets an action based on a users input. If user enters a non-specified
+	 * enumeration, it will ask for another input.
+	 * 
 	 * @return Action type
 	 */
 	public static Action getAction() {
@@ -54,4 +53,3 @@ public enum Action {
 	}
 
 }
-

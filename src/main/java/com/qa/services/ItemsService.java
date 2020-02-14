@@ -13,6 +13,7 @@ public class ItemsService implements CrudServices<Items> {
 	public ItemsService(Dao<Items> itemsDao) {
 		this.itemsDao = itemsDao;
 	}
+
 	public List<Items> readAll() {
 		return itemsDao.readAll();
 	}
@@ -34,9 +35,4 @@ public class ItemsService implements CrudServices<Items> {
 		return null;
 	}
 
-
-		
-	}
-
-
-
+}

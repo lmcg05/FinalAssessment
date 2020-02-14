@@ -26,7 +26,6 @@ public class CustomerController implements CrudController<Customer> {
 	String getInput() {
 		return Utils.getInput();
 	}
-	
 
 	public List<Customer> readAll() {
 		// TODO Auto-generated method stub
@@ -59,7 +58,7 @@ public class CustomerController implements CrudController<Customer> {
 		String firstName = getInput();
 		LOGGER.info("Please enter a surname");
 		String lastName = getInput();
-		Customer customer = customerService.update( new Customer(id, firstName, lastName));
+		Customer customer = customerService.update(new Customer(id, firstName, lastName));
 		LOGGER.info("Customer Updated");
 		return customer;
 	}

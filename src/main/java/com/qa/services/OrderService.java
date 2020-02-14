@@ -1,11 +1,8 @@
 package com.qa.services;
 
-
-
 import java.util.List;
 
 import com.qa.persistence.Dao;
-
 
 import domain.Order;
 
@@ -41,11 +38,6 @@ public class OrderService implements CrudServices<Order> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-	
-
-
 
 }
 
