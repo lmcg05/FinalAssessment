@@ -1505,3 +1505,16 @@
 2020-02-14 05:51:33 INFO  CustomerController:49 - Customer created
 2020-02-14 05:51:33 INFO  CustomerController:68 - Please enter the id of the customer you would like to delete
 2020-02-14 05:51:33 INFO  ItemsController:66 - Please enter the id of the customer you would like to delete
+2020-02-14 06:01:35 INFO  CustomerController:34 - id:null firstName:Chris lastName:P email:null
+2020-02-14 06:01:35 INFO  CustomerController:34 - id:null firstName:Rhys lastName:T email:null
+2020-02-14 06:01:35 INFO  CustomerController:34 - id:null firstName:Nic lastName:J email:null
+2020-02-14 06:01:35 INFO  CustomerController:55 - Please enter the id of the customer you would like to update
+2020-02-14 06:01:35 INFO  CustomerController:57 - Please enter a first name
+2020-02-14 06:01:35 INFO  CustomerController:59 - Please enter a surname
+2020-02-14 06:01:35 INFO  CustomerController:62 - Customer Updated
+2020-02-14 06:01:35 INFO  CustomerController:42 - Please enter a first name
+2020-02-14 06:01:35 INFO  CustomerController:44 - Please enter a surname
+2020-02-14 06:01:35 INFO  CustomerController:46 - Please enter an email
+2020-02-14 06:01:35 INFO  CustomerController:49 - Customer created
+2020-02-14 06:01:35 INFO  CustomerController:68 - Please enter the id of the customer you would like to delete
+2020-02-14 06:01:35 INFO  ItemsController:66 - Please enter the id of the customer you would like to delete
