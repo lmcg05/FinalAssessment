@@ -6,15 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.qa.services.ItemsService;
 
 import domain.Items;
-
+@	RunWith(MockitoJUnitRunner.class)
 public class ItemControllerTest2 {
 
 	/**
@@ -37,34 +39,34 @@ public class ItemControllerTest2 {
 		List<Items> items = new ArrayList<>();
 		Items.add(new Items("orange", 2.00));
 		Items.add(new Items("apple", 4.00));
-		//Mockito.when(itemsServices.readAll()).thenReturn(items);
-	//	assertEquals(items, itemsController.readAll());
+		Mockito.when(itemsServices.readAll()).thenReturn(items);
+		assertEquals(items, itemsController.readAll());
 	}
 
-	@Test
-	public void createTest() {
-		String item_name = "orange";
-		Double price_per_items = 2.00;
-	//	Mockito.doReturn(item_name, price_per_items).when(itemsController).getInput();
-	//	Items items = new Items(item_name, price_per_items);
-	//	Items savedItems = new Items(1L, "orange", 2.99);
-	//	Mockito.when(itemsServices.create(items)).thenReturn(savedItems);
-	//	assertEquals(savedItems, itemsController.create());
-	}
-
-	/**
-	 * 
-	 */
-	@Test
-	public void updateTest() {
-		String id = "1";
-		String items_name = "oreo";
-		Double price_per_items = 2.99;
-	//	Mockito.doReturn(id, items_name, price_per_items).when(itemsController).getInput();
-		Items items = new Items(1, items_name, price_per_items);
-	//	Mockito.when(itemsServices.update(items)).thenReturn(items);
-	//	assertEquals(items, itemsController.update());
-	}
+//	@Test
+//	public void createTest() {
+//		String item_name = "orange";
+//		Double price_per_items = 2.00;
+//		Mockito.doReturn(item_name, price_per_items).when(itemsController).getInput();
+//		Items items = new Items(item_name, price_per_items);
+//		Items savedItems = new Items(1L, "orange", 2.99);
+//		Mockito.when(itemsServices.create(items)).thenReturn(savedItems);
+//		assertEquals(savedItems, itemsController.create());
+//	}
+//
+//	/**
+//	 * 
+//	 */
+//	@Test
+//	public void updateTest() {
+//		String id = "1";
+//		String items_name = "oreo";
+//		Double price_per_items = 2.99;
+//		Mockito.doReturn(id, items_name, price_per_items).when(itemsController).getInput();
+//		Items items = new Items(1, items_name, price_per_items);
+//		Mockito.when(itemsServices.update(items)).thenReturn(items);
+//		assertEquals(items, itemsController.update());
+//	}
 	
 
 	/**
@@ -73,9 +75,9 @@ public class ItemControllerTest2 {
 	@Test
 	public void deleteTest() {
 		String id = "1";
-	//	Mockito.doReturn(id).when(itemsController).getInput();
-	//	itemsController.delete();
-	//	Mockito.verify(itemsServices, Mockito.times(1)).delete(1L);
+		Mockito.doReturn(id).when(itemsController).getInput();
+		itemsController.delete();
+		Mockito.verify(itemsServices, Mockito.times(1)).delete(1L);
 	}
 	
 }
