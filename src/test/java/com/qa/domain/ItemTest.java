@@ -20,17 +20,7 @@ public class ItemTest {
 	
 	@Test
 	public void settersTest() {
-//		assertNotNull(items.getId());
-//		assertNotNull(items.getItems_name());
-//		assertNotNull(items.getPrice_per_items());
-//		
-//		items.setId(1);
-//		assertNull(items.getId());
-//		items.setItems_name(null);
-//		assertNull(items.getItems_name());
-//		items.setPrice_per_items(null);
-//		assertNull(items.getPrice_per_items());
-//		
+
 	}
 	
 	@Test
@@ -43,12 +33,6 @@ public class ItemTest {
 		assertFalse(items.equals(new Object()));
 	}
 	
-	@Test
-	public void createItemsWithId() {
-//		assertEquals(1L, items.getId(), 0);
-//		assertEquals("pineapple", items.getItems_name());
-//		assertEquals("2.99", items.getPrice_per_items());
-	}
 	
 	@Test
 	public void checkEquality() {
