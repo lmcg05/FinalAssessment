@@ -1,7 +1,5 @@
 package domain;
 
-
-
 public class Customer {
 	private Long id;
 	private String firstName;
@@ -12,24 +10,25 @@ public class Customer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
+
 	public Customer(String firstName, String lastName, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 	}
+
 	public Customer(Long id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+
 	public Customer(Long id, String firstName, String lastName, String email) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 	}
-	
 
 	public Long getId() {
 		return id;
@@ -54,7 +53,6 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 
 	public String getLastName() {
 		return lastName;
@@ -111,6 +109,4 @@ public class Customer {
 		return true;
 	}
 
-	
-	}
-
+}
