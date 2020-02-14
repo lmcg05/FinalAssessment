@@ -72,7 +72,6 @@ public class MYsqlCustomerDao implements Dao<Customer> {
 
 				customers.add(new Customer(id, firstName, lastName, email));
 				/// * email, mobile*/;
-
 			}
 		} catch (Exception e) {
 			LOGGER.error("error inserting the customer details");
